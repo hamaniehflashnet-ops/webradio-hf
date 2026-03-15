@@ -1,0 +1,7 @@
+{
+  "name": "Hamanieh-Flash.net",
+  "description": "L'actualité sous un autre angle !!! Radio, TV et News en direct.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

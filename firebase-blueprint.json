@@ -1,0 +1,78 @@
+{
+  "entities": {
+    "Article": {
+      "title": "Article",
+      "description": "A news article with image, title, and category.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "The title of the article" },
+        "content": { "type": "string", "description": "The full content of the article (Markdown)" },
+        "imageUrl": { "type": "string", "description": "URL to the article image" },
+        "category": { "type": "string", "enum": ["actualité locale", "actualité internationale", "culture", "sport", "religion", "musique"], "description": "The category of the article" },
+        "authorId": { "type": "string", "description": "UID of the author" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Last update timestamp" }
+      },
+      "required": ["title", "content", "imageUrl", "category", "authorId", "createdAt"]
+    },
+    "Podcast": {
+      "title": "Podcast",
+      "description": "An audio podcast episode.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "The title of the podcast" },
+        "description": { "type": "string", "description": "A short description of the episode" },
+        "audioUrl": { "type": "string", "description": "URL to the audio file" },
+        "imageUrl": { "type": "string", "description": "URL to the podcast cover image" },
+        "duration": { "type": "string", "description": "Duration of the podcast (e.g., 45:00)" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" }
+      },
+      "required": ["title", "audioUrl", "createdAt"]
+    },
+    "Pharmacy": {
+      "title": "Pharmacy",
+      "description": "A pharmacy on duty.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the pharmacy" },
+        "phone": { "type": "string", "description": "Phone number" },
+        "address": { "type": "string", "description": "Physical address" },
+        "latitude": { "type": "number", "description": "Latitude for map" },
+        "longitude": { "type": "number", "description": "Longitude for map" },
+        "isOnDuty": { "type": "boolean", "description": "Whether it is currently on duty" }
+      },
+      "required": ["name", "phone", "address"]
+    },
+    "StreamConfig": {
+      "title": "StreamConfig",
+      "description": "Configuration for live radio and TV streams.",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "enum": ["radio", "tv"], "description": "Type of stream" },
+        "url": { "type": "string", "description": "Stream URL" },
+        "currentShow": { "type": "string", "description": "Name of the current show" },
+        "description": { "type": "string", "description": "Description of the show" }
+      },
+      "required": ["type", "url"]
+    },
+    "User": {
+      "title": "User",
+      "description": "User profile and role management.",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"], "description": "User role" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/articles/{articleId}": { "schema": "Article", "description": "News articles" },
+    "/podcasts/{podcastId}": { "schema": "Podcast", "description": "Podcast episodes" },
+    "/pharmacies/{pharmacyId}": { "schema": "Pharmacy", "description": "Pharmacies on duty" },
+    "/streams/{streamId}": { "schema": "StreamConfig", "description": "Live stream configurations" },
+    "/users/{userId}": { "schema": "User", "description": "User profiles" }
+  }
+}
